@@ -18,31 +18,32 @@
 
     <!-- Main content -->
     <section class="content">
+      <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let medico of Medicos; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{medico.nombres}}</td>
+                <td>{{medico.email}}</td>
+                <td>
+                    <span (click)="removeMedico(medico)" class="btn btn-danger">Delete</span> &nbsp;
+                    <span class="btn btn-primary">Edit</span>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+        
+      
 
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Title</h3>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          Start creating your amazing application!
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
-        </div>
-        <!-- /.card-footer-->
-      </div>
-      <!-- /.card -->
+      
 
     </section>
     <!-- /.content -->
