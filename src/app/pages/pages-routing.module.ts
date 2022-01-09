@@ -11,11 +11,12 @@ import { MainPageComponent } from './main-page/main-page.component';
 //import { CitasMedicasComponent } from './main-page/citas-medicas/citas-medicas.component';
 //import { AdministracionComponent } from './main-page/administracion/administracion.component';
 //import { ReportesEstadisticosComponent } from './main-page/reportes-estadisticos/reportes-estadisticos.component';
-
+import { Error404Component } from './main-page/error404/error404.component';
 
 
 
 const routes: Routes = [
+    { path: 'login', loadChildren: () => import('./login/login.module').then(m=>m.LoginModule)},
     { path: '', 
       component: MainPageComponent,
       children: [
@@ -27,7 +28,7 @@ const routes: Routes = [
         { path: 'citas-medicas', loadChildren: () => import('./main-page/citas-medicas/citas-medicas.module').then(m=>m.CitasMedicasModule)},
         { path: 'administracion', loadChildren: () => import('./main-page/administracion/administracion.module').then(m=>m.AdministracionModule)},
         { path: 'reportes-estadisticos', loadChildren: () => import('./main-page/reportes-estadisticos/reportes-estadisticos.module').then(m=>m.ReportesEstadisticosModule)},
-
+        { path: '**', component: Error404Component }
       ]
 
     }
