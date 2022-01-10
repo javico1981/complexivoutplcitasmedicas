@@ -5,6 +5,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Médicos</h1>
+            <button class="btn btn-primary" [routerLink]="['/medicos/crear-medico']">crear</button>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -16,36 +17,7 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let medico of Medicos; let i = index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{medico.nombres}}</td>
-                <td>{{medico.email}}</td>
-                <td>
-                    <span (click)="removeMedico(medico)" class="btn btn-danger">Delete</span> &nbsp;
-                    <span class="btn btn-primary">Edit</span>
-                </td>
-              </tr>
-          </tbody>
-      </table>
-        
-      
-
-
-      
-
-    </section>
+    <router-outlet></router-outlet>
     <!-- /.content -->
   </div>
 

@@ -44,10 +44,10 @@
           </li>
 
           <li class="nav-item">
-            <a [routerLink]="['/medicos']" class="nav-link">
+            <a [routerLink]="['/medicos/lista-medicos']" class="nav-link">
               <i class="nav-icon fas fa-user-md"></i>
               <p>
-                Médicos
+                Medicos
               </p>
             </a>
           </li>
@@ -93,6 +93,15 @@
               <i class="nav-icon fas fa-poll"></i>
               <p>
                 Reportes-Estadisticos
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link btn text-left" (click)="logout()">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+                Salir del sistema
               </p>
             </a>
           </li>

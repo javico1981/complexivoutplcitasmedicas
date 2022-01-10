@@ -3,12 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Componentes
 import { MedicosComponent } from './medicos.component';
+import { ListaMedicosComponent } from './lista-medicos/lista-medicos.component';
+import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 
 
 
 
 const routes: Routes = [
-    { path: '', component: MedicosComponent}
+    { path: '', component: MedicosComponent, 
+      children:[
+      {
+        path: 'lista-medicos', component: ListaMedicosComponent
+      },
+      {
+        path: 'crear-medico', component: CrearMedicoComponent
+      },
+      ]
+    }
 ];
 
 @NgModule({

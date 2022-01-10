@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 
 //Modulos compartidos
 import { PagesModule } from './pages/pages.module';
@@ -18,7 +22,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     PagesModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule 
+    AngularFireDatabaseModule,
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
