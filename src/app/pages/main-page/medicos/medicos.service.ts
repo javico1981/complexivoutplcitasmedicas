@@ -27,26 +27,18 @@ export class MedicosService {
       this.angularFirestore
       .collection('medico-collection')
       .add(medico)
-      .then(response => {console.log(response)}, error => reject(error));
+      .then(response => {resolve(response)}, error => reject(error));
     });
   }
 
   updateMedico(medico: Medico, id: string) {
-    return this.angularFirestore
+    return new Promise<any>((resolve, reject) => { 
+    this.angularFirestore
     .collection('medico-collection')
     .doc(id)
-    .update({
-      cedula: medico.cedula,
-      apellidos: medico.apellidos,
-      nombres: medico.nombres,
-      email: medico.email,
-      telefono: medico.telefono,
-      direccion: medico.direccion,
-      ciudad: medico.ciudad,
-      fecha: medico.fecha,
-      edad: medico.edad,
-      genero: medico.genero,
-    });
+    .update(medico)
+    .then(response => {resolve(response)}, error => reject(error));
+    })
   }
 
   deleteMedico(medico: Medico) {

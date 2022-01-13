@@ -16,7 +16,7 @@
                     <td>{{medico.email}}</td>
                     <td>
                         <span (click)="removeMedico(medico)" class="btn btn-danger">Delete</span> &nbsp;
-                        <span class="btn btn-primary">Edit</span>
+                        <span class="btn btn-primary" [routerLink]="['/medicos/crear-medico/'+medico.id]">Edit</span>
                     </td>
                   </tr>
               </tbody>

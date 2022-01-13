@@ -46,7 +46,7 @@
 	          </div>
 	          <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
 	        </div>
-	        <div class="row">
+	        <div class="row mb-2">
 	          <!-- /.col -->
 	          <div class="col-12">
 	            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
@@ -54,6 +54,22 @@
 	          <!-- /.col -->
 	        </div>
 	      </form>
+		  <div class="row mb-2" *ngIf="isPublic">
+			<div class="col-12">
+			  	<button type="button"  (click)="registro()" class="btn btn-primary btn-block">Registrarse</button>
+			</div>
+		  </div>
+		  <div class="row" *ngIf="isPublic">
+			<div class="col-12">
+				<button type="button"  (click)="toogleVista()" class="btn btn-primary btn-block">Soy admin</button>
+			</div>
+		  </div>
+
+		  <div class="row" *ngIf="!isPublic">
+			<div class="col-12">
+				<button type="button"  (click)="toogleVista()" class="btn btn-primary btn-block">Ingreso público</button>
+			</div>
+		  </div>
 	    </div>
 	    <!-- /.login-card-body -->
 	  </div>

@@ -16,6 +16,9 @@ const routes: Routes = [
         path: 'lista-medicos', component: ListaMedicosComponent
       },
       {
+        path: 'crear-medico/:id', component: CrearMedicoComponent
+      },
+      {
         path: 'crear-medico', component: CrearMedicoComponent
       },
       ]

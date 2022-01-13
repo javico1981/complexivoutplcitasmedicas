@@ -1,13 +1,13 @@
 export interface Medico {
 	id: string;
-	cedula: number;
+	cedula: string;
 	apellidos: string;
 	nombres: string;
 	email: string;
 	telefono: string;
 	direccion: string;
 	ciudad: string;
-	fecha: Date;
+	fecha_nacimiento: Date;
 	edad: number;
 	genero: string;
 }

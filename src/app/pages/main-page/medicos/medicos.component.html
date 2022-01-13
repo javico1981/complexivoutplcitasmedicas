@@ -5,7 +5,8 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Médicos</h1>
-            <button class="btn btn-primary" [routerLink]="['/medicos/crear-medico']">crear</button>
+            <button *ngIf="isList" class="btn btn-primary" [routerLink]="['/medicos/crear-medico']">Crear médico</button>
+            <button *ngIf="isCreate" class="btn btn-primary" [routerLink]="['/medicos/lista-medicos']">Lista médicos</button>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

@@ -1,1 +1,76 @@
-<p>crear-medico works!</p>
+
+<div class="container-fluid col-6">
+    <form [formGroup]="medicoForm" (ngSubmit)="ngSubmit()" novalidate>
+
+        <div class="mb-3">
+            <label>Cédula</label>
+            <input [ngClass]="{'is-invalid':invalidField('cedula')}" type="text" formControlName="cedula" class="form-control" placeholder="Cédula" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Apellidos</label>
+            <input [ngClass]="{'is-invalid':invalidField('apellidos')}" type="text" formControlName="apellidos" class="form-control" placeholder="Apellidos" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Nombres</label>
+            <input [ngClass]="{'is-invalid':invalidField('nombres')}" type="text" formControlName="nombres" class="form-control" placeholder="nombres" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Teléfono</label>
+            <input [ngClass]="{'is-invalid':invalidField('telefono')}" type="text" formControlName="telefono" class="form-control" placeholder="Telefono" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Email</label>
+            <input [ngClass]="{'is-invalid':invalidField('email')}" type="email" formControlName="email" class="form-control" placeholder="Email" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Direccion</label>
+            <input [ngClass]="{'is-invalid':invalidField('direccion')}" type="text" formControlName="direccion" class="form-control" placeholder="Dirección" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Ciudad</label>
+            <input [ngClass]="{'is-invalid':invalidField('ciudad')}" type="text" formControlName="ciudad" class="form-control" placeholder="Ciudad" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Fecha Nacimiento</label>
+            <input [ngClass]="{'is-invalid':invalidField('fecha_nacimiento')}" type="date" formControlName="fecha_nacimiento" class="form-control" placeholder="Fecha Nacimiento" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        
+        <div class="mb-3">
+            <label>edad</label>
+            <input  [ngClass]="{'is-invalid':invalidField('edad')}" type="number" formControlName="edad" class="form-control" placeholder="Edad" [readonly]="true">
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+    
+        <div class="mb-3">
+            <label>Género</label>
+            <select [ngClass]="{'is-invalid':invalidField('genero')}" class="form-control form-select form-select-lg mb-3" formControlName="genero" required>
+                <option *ngFor="let item of tiposGenero; index as index" [value]="item">{{item}}</option>
+            </select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+    
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">{{isEdit ? 'Editar médico': 'Crear médico'}}</button>
+        </div>
+    
+    </form>
+</div>
+
