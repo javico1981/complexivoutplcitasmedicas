@@ -1,7 +1,5 @@
-import { Especialidad } from 'src/app/pages/main-page/especialidades/especialidad.model';
 
-
-export interface Medico {
+export interface Paciente {
 	id: string;
 	cedula: string;
 	apellidos: string;
@@ -13,7 +11,6 @@ export interface Medico {
 	fecha_nacimiento: Date;
 	edad: number;
 	genero: string;
-	especialidades: Especialidad[];
 	rol: string;
 	rolId: string;
 	uid: string;

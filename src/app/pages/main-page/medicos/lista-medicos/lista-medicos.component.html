@@ -4,9 +4,9 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Nombre</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Accción</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,8 +15,8 @@
                     <td>{{medico.nombres}}</td>
                     <td>{{medico.email}}</td>
                     <td>
-                        <span (click)="removeMedico(medico)" class="btn btn-danger">Delete</span> &nbsp;
-                        <span class="btn btn-primary" [routerLink]="['/medicos/crear-medico/'+medico.id]">Edit</span>
+                        <span (click)="removeMedico(medico)" class="btn btn-danger">Borrar</span> &nbsp;
+                        <span class="btn btn-primary" [routerLink]="['/medicos/crear-medico/'+medico.id]">Editar</span>
                     </td>
                   </tr>
               </tbody>

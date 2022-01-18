@@ -39,12 +39,4 @@ export class LoginService {
     );
   }
 
-  async register(email: string, password: string) {
-    try{
-      return await this.afAuth.createUserWithEmailAndPassword(email, password);
-    }catch (err){
-      console.log("Error en registro", err);
-      return null;
-    }
-  }
 }

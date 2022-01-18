@@ -1,0 +1,130 @@
+<div class="contenedor pt-2 pb-5">
+	<div class="login-box-custom">
+	  <div class="login-logo">
+	    <img src="../../../assets/img/hbc.png" class="center" width="130px" height="130px" />
+	    <a><b>Hospital EL ORO</b></a>
+	  </div>
+	  <!-- /.login-logo -->
+	  <div class="card">
+	    <div class="card-body login-card-body">
+	      <p class="login-box-msg">Registrate como paciente</p>
+
+	      <form
+		  	novalidate
+	      	autocomplete="off" 
+	      	[formGroup]="registroForm"
+	      	(ngSubmit)="registroPaciente()">
+
+			<div class="mb-3">
+				<div class="inputs-container">
+					<div>
+						<label>Email</label>
+						<input [ngClass]="{'is-invalid':invalidField('email')}" type="email" formControlName="email" class="form-control" placeholder="Email" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+					<div>
+						<label>Contraseña</label>
+						<input [ngClass]="{'is-invalid':invalidField('password')}" type="password" formControlName="password" class="form-control" placeholder="Password" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+				</div>
+				
+			</div>
+
+			
+			<div class="mb-3">
+				<div class="inputs-container">
+					<div>
+						<label>Nombres</label>
+						<input [ngClass]="{'is-invalid':invalidField('nombres')}" type="text" formControlName="nombres" class="form-control" placeholder="nombres" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+					<div>
+						<label>Apellidos</label>
+						<input [ngClass]="{'is-invalid':invalidField('apellidos')}" type="text" formControlName="apellidos" class="form-control" placeholder="Apellidos" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+				</div>
+				
+			</div>
+		
+			
+		
+			<div class="mb-3">
+				<div class="inputs-container">
+					<div>
+						<label>Teléfono</label>
+						<input [ngClass]="{'is-invalid':invalidField('telefono')}" type="text" formControlName="telefono" class="form-control" placeholder="Telefono" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+					<div>
+						<label>Cédula</label>
+						<input [ngClass]="{'is-invalid':invalidField('cedula')}" type="text" formControlName="cedula" class="form-control" placeholder="Cédula" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+				</div>
+				
+			</div>
+		
+			
+		
+			<div class="mb-3">
+				<div class="inputs-container">
+					<div>
+						<label>Direccion</label>
+						<input [ngClass]="{'is-invalid':invalidField('direccion')}" type="text" formControlName="direccion" class="form-control" placeholder="Dirección" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+					<div>
+						<label>Ciudad</label>
+						<input [ngClass]="{'is-invalid':invalidField('ciudad')}" type="text" formControlName="ciudad" class="form-control" placeholder="Ciudad" required>
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+				</div>
+				
+			</div>
+		
+		
+			<div class="mb-3">
+				<div class="inputs-container">
+					<div>
+						<label>Fecha Nacimiento</label>
+						<input (change)="changeInputDate($event)" [ngClass]="{'is-invalid':invalidField('fecha_nacimiento')}" type="date" formControlName="fecha_nacimiento" class="form-control" placeholder="Fecha Nacimiento" required [max]="maxDate">
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+					<div>
+						<label>edad</label>
+						<input  [ngClass]="{'is-invalid':invalidField('edad')}" type="number" formControlName="edad" class="form-control" placeholder="Edad" [readonly]="true">
+						<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+					</div>
+				</div>
+				
+			</div>
+		
+			<div class="mb-3">
+				<label>Género</label>
+				<select [ngClass]="{'is-invalid':invalidField('genero')}" class="form-control form-select form-select-lg mb-3" formControlName="genero" required>
+					<option *ngFor="let item of tiposGenero; index as index" [value]="item">{{item}}</option>
+				</select>
+				<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+			</div>
+
+	        <div class="row mb-2">
+	          <!-- /.col -->
+	        	<div class="col-12 mb-2">
+					<button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+			  	</div>
+				  <div class="col-12">
+					<button type="button" routerLink="/login" class="btn btn-primary btn-block">¿Ya tienes una cuenta?</button>
+				</div>
+	          <!-- /.col -->
+	        </div>
+	      </form>
+
+	    </div>
+	    <!-- /.login-card-body -->
+	  </div>
+	</div>
+	<!-- /.login-box -->
+
+</div>

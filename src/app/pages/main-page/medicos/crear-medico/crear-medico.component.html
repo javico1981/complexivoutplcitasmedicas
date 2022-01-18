@@ -28,7 +28,7 @@
     
         <div class="mb-3">
             <label>Email</label>
-            <input [ngClass]="{'is-invalid':invalidField('email')}" type="email" formControlName="email" class="form-control" placeholder="Email" required>
+            <input [readonly]="isEdit" [ngClass]="{'is-invalid':invalidField('email')}" type="email" formControlName="email" class="form-control" placeholder="Email" required>
             <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
         </div>
     
@@ -46,7 +46,7 @@
     
         <div class="mb-3">
             <label>Fecha Nacimiento</label>
-            <input [ngClass]="{'is-invalid':invalidField('fecha_nacimiento')}" type="date" formControlName="fecha_nacimiento" class="form-control" placeholder="Fecha Nacimiento" required>
+            <input (change)="changeInputDate($event)" [ngClass]="{'is-invalid':invalidField('fecha_nacimiento')}" type="date" formControlName="fecha_nacimiento" class="form-control" placeholder="Fecha Nacimiento" required [max]="maxDate">
             <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
         </div>
     
@@ -65,6 +65,21 @@
             </select>
             <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
         </div>
+
+        <div class="mb-3">
+            <label>Especialidades</label>
+            <ng-select [ngClass]="{'is-invalid':invalidField('especialidades')}" class="form-select form-select-lg"
+                [items]="especialidades"
+                [multiple]="true"
+                [closeOnSelect]="false"
+                [searchable]="false"
+                bindLabel="nombre"
+                placeholder="Selecciones"
+                formControlName="especialidades">
+            </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+        
     
     
         <div class="mb-3">

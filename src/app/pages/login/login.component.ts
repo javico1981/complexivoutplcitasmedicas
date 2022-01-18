@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { functions } from 'src/app/helpers/functions';
 import { Ilogin } from 'src/app/interface/ilogin';
 import { LoginService } from 'src/app/services/login.service';
 import { alerts } from 'src/app/helpers/alerts';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
 
   isPublic = true;
   public f = this.form.group({
@@ -25,6 +27,8 @@ export class LoginComponent implements OnInit {
 
   formSubmitted = false;
   errorForm = "";
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private form: FormBuilder, private loginService: LoginService, private router: Router) { }
 
@@ -46,7 +50,7 @@ export class LoginComponent implements OnInit {
 
       if(this.isPublic){
 
-        this.loginService.loginPublic(data).subscribe(
+        this.loginService.loginPublic(data).pipe(takeUntil(this._unsubscribeAll)).subscribe(
           (resp)=>{
               
               this.router.navigateByUrl("/");
@@ -67,7 +71,7 @@ export class LoginComponent implements OnInit {
 
       }else {
 
-        this.loginService.loginAdmin(data).subscribe(
+        this.loginService.loginAdmin(data).pipe(takeUntil(this._unsubscribeAll)).subscribe(
           (resp)=>{
               
               this.router.navigateByUrl("/");
@@ -91,19 +95,7 @@ export class LoginComponent implements OnInit {
      
   }
 
-  registro(){
-
-    const data: any = {
-      email: this.f.controls.email.value,
-      password: this.f.controls.password.value,
-    }
-
-    this.loginService.register(data.email, data.password).then(res => {
-      console.log("Se registro", res);
-    })
-  }
-    
-
+  
   invalidField(field:string){
       
       return functions.invalidField(field, this.f, this.formSubmitted);
@@ -112,6 +104,11 @@ export class LoginComponent implements OnInit {
 
   toogleVista() {
     this.isPublic = !this.isPublic;
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 
 }

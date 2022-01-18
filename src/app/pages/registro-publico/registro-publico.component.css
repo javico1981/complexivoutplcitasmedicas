@@ -1,0 +1,15 @@
+
+.contenedor {
+	background: #C0C0C0;
+	display: flex;
+	justify-content: center;
+}
+
+.inputs-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.login-box-custom {
+	width: 600px;
+}
