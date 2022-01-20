@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { Router } from '@angular/router';
 
 
 
@@ -13,30 +15,50 @@ import firebase from 'firebase/compat/app';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth) { }
+  constructor(
+    private http: HttpClient,
+    private afAuth: AngularFireAuth,
+    private angularFirestore: AngularFirestore,
+    private router: Router
+    ) { }
 
-  loginAdmin(data: Ilogin){
-
-        return this.http.post(environment.urlLogin, data).pipe(
-            map((resp:any)=>{
-              
-              localStorage.setItem('token', resp.idToken);
-              localStorage.setItem('refreshToken', resp.refreshToken);
-            })
-
-        );
-  }
-
-  loginPublic(data: Ilogin){
+  login(data: Ilogin){
 
     return this.http.post(environment.urlLogin, data).pipe(
         map((resp:any)=>{
-          
           localStorage.setItem('token', resp.idToken);
           localStorage.setItem('refreshToken', resp.refreshToken);
+          return resp
         })
 
     );
+  }
+
+
+  getDataUser(userUID: string, path: string) {
+    return this.angularFirestore
+    .collection(path)
+    .doc(userUID)
+    .valueChanges()
+   
+  }
+
+
+
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('userData');
+    this.router.navigateByUrl("/login");
+  }
+
+  getDataUserLogged(): any {
+
+    let user = localStorage.getItem('userData') || null;
+    if (!user) {
+      return null
+    }
+    return JSON.parse(user);
   }
 
 }

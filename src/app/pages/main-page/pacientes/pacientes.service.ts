@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Medico } from './medico.model';
+import { Paciente } from './paciente.model';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedicosService {
+export class PacientesService {
 
   constructor(private angularFirestore: AngularFirestore, private afAuth: AngularFireAuth ) { }
 
-  getMedicoDoc(id:string){
+  getPacienteDoc(id:string){
     return this.angularFirestore
-    .collection('medicos')
+    .collection('pacientes')
     .doc(id)
     .valueChanges()
   }
 
-  getMedicoList() {
+  getPacienteList() {
     return this.angularFirestore
-    .collection('medicos')
+    .collection('pacientes')
     .snapshotChanges()
   }
 
@@ -33,48 +33,40 @@ export class MedicosService {
   }
 
 
-  async createMedico(medico: Medico) {
+  async createPaciente(paciente: Paciente) {
 
     return new Promise<any>(async (resolve, reject) => {  
 
-      const res = await this.createUser(medico.email, 'password');
+      const res = await this.createUser(paciente.email, 'password');
       if (!res) {
         reject(res);
         return;
       }
-      let data = medico;
+      let data = paciente;
       const uid = res.user?.uid || "";
       data.uid = uid;
 
-      const collection = this.angularFirestore.collection('medicos');
+      const collection = this.angularFirestore.collection('pacientes');
       return await collection.doc(uid).set(data).then(response => { resolve(response)}, error => reject(error));
     });
   }
   
 
-  updateMedico(medico: Medico, id: string) {
+  updatePaciente(paciente: Paciente, id: string) {
     return new Promise<any>((resolve, reject) => { 
     this.angularFirestore
-    .collection('medicos')
+    .collection('pacientes')
     .doc(id)
-    .update(medico)
+    .update(paciente)
     .then(response => {resolve(response)}, error => reject(error));
     })
   }
 
-  deleteMedico(medico: Medico) {
+  deletePaciente(paciente: Paciente) {
     return this.angularFirestore
-    .collection('medicos')
-    .doc(medico.id)
+    .collection('pacientes')
+    .doc(paciente.id)
     .delete()
   }
-
-
-  getEspecialidadesList() {
-    return this.angularFirestore
-    .collection('especialidades')
-    .snapshotChanges()
-  }
-
 
 }

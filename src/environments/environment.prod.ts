@@ -10,5 +10,28 @@ export const environment = {
     storageBucket: "hospitaldb-b1c76.appspot.com",
     messagingSenderId: "103067529980",
     appId: "1:103067529980:web:af5fe17366cc4424279d79"
+  },
+
+  roles: {
+    administrador: {
+      id: 'administrador',
+      nombre: 'Administrador'
+    },
+    paciente: { 
+      id: 'paciente',
+      nombre: 'Paciente' 
+    },
+    medico: { 
+      id: 'medico',
+      nombre: 'Médico' 
+    },
+    gerencia: 
+    { id: 'gerencia',
+      nombre: 'Gerencia' 
+    },
+    secretaria: { 
+      id: 'secretaria',
+      nombre: 'Secretaria'
+    }
   }
 };

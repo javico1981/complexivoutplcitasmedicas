@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { MedicosService } from './medicos.service';
+
 
 
 @Component({
@@ -17,7 +17,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private route: Router, private medicosService: MedicosService) {
+  constructor(private route: Router) {
 
     this.route.events.pipe(filter(event => event instanceof NavigationEnd), takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
       if (res.url.includes('crear-medico')) {
@@ -38,21 +38,5 @@ export class MedicosComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
-  /*crearmedicoprueba(){
-      const newMedico={
-        cedula: 1234567890,
-        apellidos: "Alvarez Jimenez",
-        nombres: "Adrian Vinicio",
-        email: "adrian.alvarez@11d03.mspz7.gob.ec",
-        telefono: "0987654323",
-        direccion: "La Tebaida",
-        ciudad:"Loja",
-        fecha: new Date(),
-        edad: 34,
-        genero: "masculino"
-      }
-      this.medicosService.createMedico(newMedico as Medico);
-  }*/
 
 }

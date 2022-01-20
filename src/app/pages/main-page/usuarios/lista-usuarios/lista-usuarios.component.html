@@ -1,0 +1,29 @@
+<!-- Main content -->
+    <section class="content">
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <tr *ngFor="let usuario of Usuarios; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{usuario.nombres}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.rol}}</td>
+                <td>
+                    <span (click)="removeUsuario(usuario)" class="btn btn-danger">Borrar</span> &nbsp;
+                    <span class="btn btn-primary" [routerLink]="['/usuarios/crear-usuario/'+ usuario.id]">Editar</span>
+                </td>
+                </tr>
+            
+               
+              </tbody>
+          </table>
+      </section>

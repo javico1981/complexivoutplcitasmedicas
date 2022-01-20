@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Paciente } from '../pages/main-page/pacientes/paciente.model';
@@ -13,20 +10,7 @@ import { Paciente } from '../pages/main-page/pacientes/paciente.model';
 })
 export class RegistroPublicoService {
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth, private angularFirestore: AngularFirestore,) { }
-
-  
-  loginPublic(data: any){
-
-    return this.http.post(environment.urlLogin, data).pipe(
-        map((resp:any)=>{
-          
-          localStorage.setItem('token', resp.idToken);
-          localStorage.setItem('refreshToken', resp.refreshToken);
-        })
-
-    );
-  }
+  constructor(private afAuth: AngularFireAuth, private angularFirestore: AngularFirestore,) { }
 
   async registroUser(email: string, password: string) {
     try{

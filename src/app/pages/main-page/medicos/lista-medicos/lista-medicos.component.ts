@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Medico } from '../medico.model';
 import { MedicosService } from '../medicos.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -9,13 +10,14 @@ import { MedicosService } from '../medicos.service';
   templateUrl: './lista-medicos.component.html',
   styleUrls: ['./lista-medicos.component.css']
 })
-export class ListaMedicosComponent implements OnInit {
+export class ListaMedicosComponent implements OnInit, OnDestroy {
 
   Medicos: Medico[]=[];
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
   constructor(public medicosService:MedicosService) { }
 
   ngOnInit(): void {
-    this.medicosService.getMedicoList().subscribe(res => {
+    this.medicosService.getMedicoList().pipe(takeUntil(this._unsubscribeAll)).subscribe(res => {
       this.Medicos = res.map( e => {
         return {
           id: e.payload.doc.id,
@@ -29,6 +31,11 @@ export class ListaMedicosComponent implements OnInit {
     if(confirm("Are you sure to delete " + medico.nombres)){
       this.medicosService.deleteMedico(medico);
     }
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 
 }

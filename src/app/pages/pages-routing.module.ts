@@ -13,6 +13,8 @@ import { MainPageComponent } from './main-page/main-page.component';
 //import { ReportesEstadisticosComponent } from './main-page/reportes-estadisticos/reportes-estadisticos.component';
 import { Error404Component } from './main-page/error404/error404.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { RolGuard } from '../guards/rol.guard';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -24,13 +26,29 @@ const routes: Routes = [
       component: MainPageComponent, canActivate: [ AuthGuard ],
       children: [
         { path: '', loadChildren: () => import('./main-page/home/home.module').then(m=>m.HomeModule)},
-        { path: 'usuarios', loadChildren: () => import('./main-page/usuarios/usuarios.module').then(m=>m.UsuariosModule)},
-        { path: 'pacientes', loadChildren: () => import('./main-page/pacientes/pacientes.module').then(m=>m.PacientesModule)},
-        { path: 'medicos', loadChildren: () => import('./main-page/medicos/medicos.module').then(m=>m.MedicosModule)},
-        { path: 'especialidades', loadChildren: () => import('./main-page/especialidades/especialidades.module').then(m=>m.EspecialidadesModule)},
+        { 
+          path: 'usuarios', loadChildren: () => import('./main-page/usuarios/usuarios.module').then(m=>m.UsuariosModule), 
+          canActivate: [ RolGuard ],
+          data: { usersEnabled: [environment.roles.administrador.id] }
+        },
+        { path: 'pacientes', loadChildren: () => import('./main-page/pacientes/pacientes.module').then(m=>m.PacientesModule),
+          canActivate: [ RolGuard ],
+          data: { usersEnabled: [environment.roles.administrador.id, environment.roles.secretaria.id] }
+        },
+        { path: 'medicos', loadChildren: () => import('./main-page/medicos/medicos.module').then(m=>m.MedicosModule),
+          canActivate: [ RolGuard ],
+          data: { usersEnabled: [environment.roles.administrador.id, environment.roles.secretaria.id] }
+        },
+        { path: 'especialidades', loadChildren: () => import('./main-page/especialidades/especialidades.module').then(m=>m.EspecialidadesModule),
+          canActivate: [ RolGuard ],
+          data: { usersEnabled: [environment.roles.administrador.id] }
+        },
         { path: 'citas-medicas', loadChildren: () => import('./main-page/citas-medicas/citas-medicas.module').then(m=>m.CitasMedicasModule)},
         { path: 'administracion', loadChildren: () => import('./main-page/administracion/administracion.module').then(m=>m.AdministracionModule)},
-        { path: 'reportes-estadisticos', loadChildren: () => import('./main-page/reportes-estadisticos/reportes-estadisticos.module').then(m=>m.ReportesEstadisticosModule)},
+        { path: 'reportes-estadisticos', loadChildren: () => import('./main-page/reportes-estadisticos/reportes-estadisticos.module').then(m=>m.ReportesEstadisticosModule),
+          canActivate: [ RolGuard ],
+          data: { usersEnabled: [environment.roles.administrador.id, environment.roles.gerencia.id] }
+        },
         { path: '**', component: Error404Component }
       ]
 

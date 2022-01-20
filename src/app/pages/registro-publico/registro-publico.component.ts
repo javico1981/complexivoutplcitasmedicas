@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { functions } from 'src/app/helpers/functions';
 import { RegistroPublicoService } from 'src/app/services/registro-publico.service';
+import { LoginService } from 'src/app/services/login.service';
 import { alerts } from 'src/app/helpers/alerts';
 import { Ilogin } from 'src/app/interface/ilogin';
 import * as moment from 'moment';
@@ -9,6 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TiposGenero } from '../main-page/medicos/crear-medico/crear-medico.component';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-registro-publico',
@@ -28,7 +30,8 @@ export class RegistroPublicoComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   constructor(
     private form: FormBuilder,
-    private registroPublicoService: RegistroPublicoService, 
+    private registroPublicoService: RegistroPublicoService,
+    private loginService: LoginService,
     private router: Router) {
 
     this.registroForm = this.form.group({
@@ -43,8 +46,8 @@ export class RegistroPublicoComponent implements OnInit, OnDestroy {
       fecha_nacimiento: [null, [Validators.required]],
       edad: [0, [Validators.min(0)]],
       genero: ["", [Validators.required]],
-      rol: 'Paciente',
-      rolId: 'paciente',
+      rol: environment.roles.paciente.nombre,
+      rolId: environment.roles.paciente.id,
 
     })
   }
@@ -74,9 +77,24 @@ export class RegistroPublicoComponent implements OnInit, OnDestroy {
         returnSecureToken: true,
       }
 
-      this.registroPublicoService.loginPublic(dataLogin).pipe(takeUntil(this._unsubscribeAll)).subscribe(
+      this.loginService.login(dataLogin).pipe(takeUntil(this._unsubscribeAll)).subscribe(
         (resp)=>{
-          this.router.navigateByUrl("/");
+         
+          this.loginService.getDataUser(resp.localId, 'pacientes').pipe(takeUntil(this._unsubscribeAll)).subscribe( (res: any) => {
+            if (res) 
+            {
+              localStorage.setItem('userData', JSON.stringify(res));
+              this.router.navigateByUrl("/");
+            } else {
+              alerts.basicAlert("Error","Error de rol, reportar","error");
+              this.loginService.logout();
+            }
+            
+          }, (err) => {
+            console.log(err);
+            alerts.basicAlert("Error","Error de rol, reportar","error");
+            this.loginService.logout();
+          })
         },
 
         (err)=>{

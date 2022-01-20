@@ -1,39 +1,40 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MedicosService } from '../medicos.service';
+import { UsuariosService } from '../usuarios.service';
 import { functions } from 'src/app/helpers/functions';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
-import { Especialidad } from '../../especialidades/especialidad.model';
 import { environment } from 'src/environments/environment';
 
 export const TiposGenero = ['Masculino', 'Femenino', 'Otro']
 
 @Component({
-  selector: 'app-crear-medico',
-  templateUrl: './crear-medico.component.html',
-  styleUrls: ['./crear-medico.component.css']
+  selector: 'app-crear-usuario',
+  templateUrl: './crear-usuario.component.html',
+  styleUrls: ['./crear-usuario.component.css']
 })
-export class CrearMedicoComponent implements OnInit, OnDestroy {
+export class CrearUsuarioComponent implements OnInit, OnDestroy {
 
   tiposGenero = TiposGenero;
-  public medicoForm: FormGroup;
+  public usuarioForm: FormGroup;
   locale = 'es-us';
   isEdit = false;
-  medicoId: string = '';
+  usuarioId: string = '';
   edad = 0;
   formSubmitted = false;
   errorForm = "";
   maxDate = moment().format('YYYY-MM-DD');
-  especialidades: Especialidad[] = [];
+
+  rolesLista: any[] = [];
+  rolesIdLista: any[] = [];
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private medicosService: MedicosService, private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute) {
+  constructor(private usuariosService: UsuariosService, private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute) {
 
-      this.medicoForm=this.formBuilder.group({
+      this.usuarioForm=this.formBuilder.group({
           cedula: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
           apellidos: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
           nombres: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -44,15 +45,14 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
           fecha_nacimiento: [null, [Validators.required]],
           edad: [0, [Validators.min(0)]],
           genero: ["", [Validators.required]],
-          especialidades: [[],[Validators.required]],
-          rol: environment.roles.medico.nombre,
-          rolId: environment.roles.medico.id,
+          rol: [null, [Validators.required]],
+          rolId: [null],
       });
 
       route.paramMap.pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
         if(res.params && res.params.id) {
           this.isEdit = true;
-          this.medicoId = res.params.id;
+          this.usuarioId = res.params.id;
         }
       })
 
@@ -62,20 +62,19 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.medicosService.getEspecialidadesList().pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
-      this.especialidades = res.map( (e: any) => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data() as {}
-        }
-      })
-    })
+   
+    for (const key in environment.roles) {
+      if (key === "gerencia" || key === "secretaria") {
+        this.rolesLista.push(environment.roles[key].nombre);
+        this.rolesIdLista.push(environment.roles[key].id);
+      }
+    }
 
 
     if(this.isEdit) {
-      this.medicosService.getMedicoDoc(this.medicoId).pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
+      this.usuariosService.getUsuarioDoc(this.usuarioId).pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
         res.edad = this.dateToAge(res.fecha_nacimiento);
-        this.medicoForm.patchValue(res);
+        this.usuarioForm.patchValue(res);
       })
     }
   }
@@ -86,17 +85,23 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
 
       this.formSubmitted = true;
 
-      if (this.medicoForm.invalid){
+      if (this.usuarioForm.invalid){
           return;
       }
 
+      let data = this.usuarioForm.value;
+
+      let indexNombreRol = this.rolesLista.indexOf(data.rol);
+
+      data.rolId = this.rolesIdLista[indexNombreRol];
+
       if(this.isEdit) {
-        this.medicosService.updateMedico(this.medicoForm.value, this.medicoId).then(() => {
-          this.router.navigate(['medicos/lista-medicos'])
+        this.usuariosService.updateUsuario(data, this.usuarioId).then(() => {
+          this.router.navigate(['usuarios/lista-usuarios'])
         });
       }else {
-        this.medicosService.createMedico(this.medicoForm.value).then(() => {
-          this.router.navigate(['medicos/lista-medicos'])
+        this.usuariosService.createUsuario(data).then(() => {
+          this.router.navigate(['usuarios/lista-usuarios'])
         }, err => {
           console.log(err);
           alert('Ya existe un usuario con ese correo');
@@ -110,12 +115,12 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
 
   changeInputDate(event: any) {
 
-    if (this.medicoForm.get('fecha_nacimiento')?.value == "") {
+    if (this.usuarioForm.get('fecha_nacimiento')?.value == "") {
       return;
     }
 
-    this.medicoForm.get('edad')?.setValue(this.dateToAge(this.medicoForm.get('fecha_nacimiento')?.value))
-    this.medicoForm.get('edad')?.updateValueAndValidity();
+    this.usuarioForm.get('edad')?.setValue(this.dateToAge(this.usuarioForm.get('fecha_nacimiento')?.value))
+    this.usuarioForm.get('edad')?.updateValueAndValidity();
   
   }
 
@@ -126,7 +131,7 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
 
   invalidField(field:string){
        
-    return functions.invalidField(field, this.medicoForm, this.formSubmitted);
+    return functions.invalidField(field, this.usuarioForm, this.formSubmitted);
   }
 
   ngOnDestroy(): void {
