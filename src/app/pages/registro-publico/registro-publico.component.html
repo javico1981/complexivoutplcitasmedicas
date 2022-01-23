@@ -103,7 +103,7 @@
 		
 			<div class="mb-3">
 				<label>Género</label>
-				<select [ngClass]="{'is-invalid':invalidField('genero')}" class="form-control form-select form-select-lg mb-3" formControlName="genero" required>
+				<select [ngClass]="{'is-invalid':invalidField('genero')}" class="form-control form-select form-select-lg" formControlName="genero" required>
 					<option *ngFor="let item of tiposGenero; index as index" [value]="item">{{item}}</option>
 				</select>
 				<div class="invalid-feedback">Por favor llene este campo correctamente.</div>

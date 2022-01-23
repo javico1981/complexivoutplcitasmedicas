@@ -14,6 +14,11 @@ export class SideBarComponent implements OnInit {
   listaBotonesVista: any[] = [];
   listaBotonesAdmin = [
     {
+      link: '/citas-medicas/lista-citas-medicas',
+      icon: 'fa-notes-medical',
+      title: 'Citas médicas'
+    },
+    {
       link: '/pacientes/lista-pacientes',
       icon: 'fa-hospital-user',
       title: 'Pacientes'
@@ -42,6 +47,11 @@ export class SideBarComponent implements OnInit {
 
   listaBotonesSecretaria = [
     {
+      link: '/citas-medicas/lista-citas-medicas',
+      icon: 'fa-notes-medical',
+      title: 'Citas médicas'
+    },
+    {
       link: '/pacientes/lista-pacientes',
       icon: 'fa-hospital-user',
       title: 'Pacientes'
@@ -62,8 +72,16 @@ export class SideBarComponent implements OnInit {
     }
   ]
 
-  listaBotonesMedico = [];
-  listaBotonesPaciente = [];
+  listaBotonesMedico = [ {
+    link: '/citas-medicas/lista-citas-medicas',
+    icon: 'fa-notes-medical',
+    title: 'Citas médicas'
+  },];
+  listaBotonesPaciente = [ {
+    link: '/citas-medicas/lista-citas-medicas',
+    icon: 'fa-notes-medical',
+    title: 'Citas médicas'
+  },];
 
 
   constructor(private router: Router, private loginService: LoginService) { }

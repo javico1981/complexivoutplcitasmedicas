@@ -9,7 +9,6 @@ import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 
 
-
 @Injectable({
   providedIn: 'root'
 })

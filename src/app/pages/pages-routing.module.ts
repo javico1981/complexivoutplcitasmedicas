@@ -43,7 +43,9 @@ const routes: Routes = [
           canActivate: [ RolGuard ],
           data: { usersEnabled: [environment.roles.administrador.id] }
         },
-        { path: 'citas-medicas', loadChildren: () => import('./main-page/citas-medicas/citas-medicas.module').then(m=>m.CitasMedicasModule)},
+        { 
+          path: 'citas-medicas', loadChildren: () => import('./main-page/citas-medicas/citas-medicas.module').then(m=>m.CitasMedicasModule)
+        },
         { path: 'administracion', loadChildren: () => import('./main-page/administracion/administracion.module').then(m=>m.AdministracionModule)},
         { path: 'reportes-estadisticos', loadChildren: () => import('./main-page/reportes-estadisticos/reportes-estadisticos.module').then(m=>m.ReportesEstadisticosModule),
           canActivate: [ RolGuard ],

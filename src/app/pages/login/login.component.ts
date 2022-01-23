@@ -18,17 +18,29 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit, OnDestroy{
 
-  isPublic = true;
+
   public f = this.form.group({
 
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    tipoUsuario: [false, Validators.required]
+    tipoUsuario: [null, Validators.required]
 
   });
 
-  isMedico = false;
-
+  tiposUsuario = [
+    {
+      id: 'paciente',
+      nombre: 'Paciente'
+    },
+    {
+      id: 'medico',
+      nombre: 'Médico'
+    },
+    {
+      id: 'empleado',
+      nombre: 'Empleado'
+    }
+  ]
   formSubmitted = false;
   errorForm = "";
 
@@ -40,89 +52,103 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   login(){
-      this.formSubmitted = true;
-      
-      if (this.f.invalid){
-        return;
-      }
+    this.formSubmitted = true;
+    
+    if (this.f.invalid){
+      return;
+    }
 
-      const data: Ilogin = {
-        email: this.f.controls.email.value,
-        password: this.f.controls.password.value,
-        returnSecureToken: true,
-      }
+    const data: Ilogin = {
+      email: this.f.controls.email.value,
+      password: this.f.controls.password.value,
+      returnSecureToken: true,
+    }
 
     
 
-      this.loginService.login(data).pipe(takeUntil(this._unsubscribeAll)).subscribe(
-        (resp)=>{
+    this.loginService.login(data).pipe(takeUntil(this._unsubscribeAll)).subscribe(
+      (resp)=>{
 
-          if (this.isPublic) {
 
-            let path = "pacientes";
+        const userTipo = this.f.controls.tipoUsuario.value;
 
-            if (this.isMedico) {
-              path = "medicos"
+        let path = "pacientes"
+
+        if (userTipo === 'medico') {
+          path = 'medicos'
+        }
+
+        if (userTipo === 'empleado') {
+          path = 'otros-usuarios'
+        }
+
+        this.loginService.getDataUser(resp.localId, path).pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
+
+          if (userTipo === 'paciente') {
+        
+            let rolIdPaciente = environment.roles.paciente.id;
+
+            if (res && res.rolId === rolIdPaciente) {
+              localStorage.setItem('userData', JSON.stringify(res));
+              this.router.navigateByUrl("/");
+            }else {
+              alerts.basicAlert("Error","Tu rol no pertenece a paciente","error");
+              this.loginService.logout();
             }
-
-            this.loginService.getDataUser(resp.localId, path).pipe(takeUntil(this._unsubscribeAll)).subscribe( (res: any) => {
-
-              let rolId = environment.roles.paciente.id;
-              if (this.isMedico) {
-                rolId = environment.roles.medico.id
-              }
-              if (res && res.rolId === rolId) {
-                localStorage.setItem('userData', JSON.stringify(res));
-                this.router.navigateByUrl("/");
-              } else {
-                alerts.basicAlert("Error","Tu rol no pertenece a " + rolId,"error");
-                this.loginService.logout();
-              }
-              
-            }, (err) => {
-              console.log(err);
-              alerts.basicAlert("Error","Tu rol no esta configurado","error");
-              this.loginService.logout();
-            })
-          }else {
-
-            this.loginService.getDataUser(resp.localId, 'otros-usuarios').pipe(takeUntil(this._unsubscribeAll)).subscribe( (res: any) => {
-              if (res && (
-                res.rolId === environment.roles.administrador.id ||
-                res.rolId === environment.roles.gerencia.id ||
-                res.rolId === environment.roles.secretaria.id)) 
-                {
-
-                localStorage.setItem('userData', JSON.stringify(res));
-                this.router.navigateByUrl("/");
-              } else {
-                alerts.basicAlert("Error","Tu rol no pertenece a empleado","error");
-                this.loginService.logout();
-              }
-              
-            }, (err) => {
-              console.log(err);
-              alerts.basicAlert("Error","Tu rol no pertenece a empleado","error");
-              this.loginService.logout();
-            })
 
           }
 
+          if (userTipo === 'medico') {
           
-        },
+            let rolIdmedico = environment.roles.medico.id;
 
-        (err)=>{
+            if (res && res.rolId === rolIdmedico) {
+              localStorage.setItem('userData', JSON.stringify(res));
+              this.router.navigateByUrl("/");
+            }else {
+              alerts.basicAlert("Error","Tu rol no pertenece a médico","error");
+              this.loginService.logout();
+            }
+
+          }
+
+          if (userTipo === 'empleado') {
+          
             
-              if (err.error.error.message == "EMAIL_NOT_FOUND"){
-                alerts.basicAlert("Error","Email inválido","error");
-              }else if (err.error.error.message == "INVALID_PASSWORD"){
-                alerts.basicAlert("Error","Contraseña inválida","error");
-              }else{
-                alerts.basicAlert("Error","A ocurrido un error","error");
-              } 
-                
-        }
-      );
+            if ( res && (
+              res.rolId === environment.roles.administrador.id ||
+              res.rolId === environment.roles.gerencia.id ||
+              res.rolId === environment.roles.secretaria.id)
+            ) {
+              localStorage.setItem('userData', JSON.stringify(res));
+              this.router.navigateByUrl("/");
+            }else {
+              alerts.basicAlert("Error","Tu rol no pertenece a empleado","error");
+              this.loginService.logout();
+            }
+
+          }
+
+        }, (err) => {
+            console.log(err);
+            alerts.basicAlert("Error","Tu rol no esta configurado","error");
+            this.loginService.logout();
+        })
+
+      },
+
+      (err)=>{
+          
+            if (err.error.error.message == "EMAIL_NOT_FOUND"){
+              alerts.basicAlert("Error","Email inválido","error");
+            }else if (err.error.error.message == "INVALID_PASSWORD"){
+              alerts.basicAlert("Error","Contraseña inválida","error");
+            }else{
+              alerts.basicAlert("Error","A ocurrido un error","error");
+            } 
+              
+      }
+    );
 
       
 
@@ -134,28 +160,6 @@ export class LoginComponent implements OnInit, OnDestroy{
       
       return functions.invalidField(field, this.f, this.formSubmitted);
       
-  }
-
-  cambioChecBox(event: any) {
-    
-    if (event.target.checked) {
-      this.isMedico = true;
-    }else {
-      this.isMedico = false;
-    }
-    
-  }
-
-  toogleVista() {
-    this.isPublic = !this.isPublic;
-
-    if (!this.isPublic) {
-      this.f.get('tipoUsuario')?.removeValidators(Validators.required);
-      this.f.get('tipoUsuario')?.updateValueAndValidity();
-    } else {
-      this.f.get('tipoUsuario')?.setValidators(Validators.required);
-      this.f.get('tipoUsuario')?.updateValueAndValidity();
-    }
   }
 
   ngOnDestroy(): void {

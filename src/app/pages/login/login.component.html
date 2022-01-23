@@ -48,10 +48,15 @@
 	          <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
 	        </div>
 
-			<div *ngIf="isPublic" class="mb-3">
-				<label for="">¿Eres médico?</label>
-				<input class="ml-2" formControlName="tipoUsuario" (change)="cambioChecBox($event)" type="checkbox">
+			
+			<div class="mb-3">
+				<label>Tipo de usuario</label>
+				<select [ngClass]="{'is-invalid':invalidField('tipoUsuario')}" class="form-control form-select form-select-lg" formControlName="tipoUsuario" required>
+					<option *ngFor="let item of tiposUsuario; index as index" [value]="item.id">{{item.nombre}}</option>
+				</select>
+				<div class="invalid-feedback">Por favor llene este campo correctamente.</div>
 			</div>
+
 
 	        <div class="row mb-2">
 	          <!-- /.col -->
@@ -62,20 +67,9 @@
 	        </div>
 
 	      </form>
-		  <div class="row mb-2" *ngIf="isPublic">
+		  <div class="row mb-2">
 			<div class="col-12">
 			  	<button type="button" routerLink="/registro-publico" class="btn btn-primary btn-block">Registrarse como paciente</button>
-			</div>
-		  </div>
-		  <div class="row" *ngIf="isPublic">
-			<div class="col-12">
-				<button type="button"  (click)="toogleVista()" class="btn btn-primary btn-block">Ingreso empleados</button>
-			</div>
-		  </div>
-
-		  <div class="row" *ngIf="!isPublic">
-			<div class="col-12">
-				<button type="button"  (click)="toogleVista()" class="btn btn-primary btn-block">Ingreso público</button>
 			</div>
 		  </div>
 	    </div>

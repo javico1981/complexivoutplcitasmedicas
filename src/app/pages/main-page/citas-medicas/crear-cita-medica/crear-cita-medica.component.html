@@ -1,0 +1,132 @@
+
+<div class="container-fluid col-6">
+    <form [formGroup]="citaMedicaForm" (ngSubmit)="ngSubmit()" novalidate>
+
+        <div class="mb-3">
+            <label>Fecha</label>
+            <input [ngClass]="{'is-invalid':invalidField('fecha')}" type="date" formControlName="fecha" class="form-control" placeholder="Fecha" required [min]="minDate">
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+        <div class="mb-3">
+            <label>Horario</label>
+            <input [ngClass]="{'is-invalid':invalidField('horario')}" type="time" formControlName="horario" class="form-control" placeholder="Horario" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Diagnóstico</label>
+            <input [readonly]="tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('diagnostico')}" type="text" formControlName="diagnostico" class="form-control" placeholder="Diagnóstico">
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Síntomas</label>
+            <input [readonly]="tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('sintomas')}" type="text" formControlName="sintomas" class="form-control" placeholder="Síntomas">
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+        
+        <div class="mb-3">
+            <label>Motivo de consulta</label>
+            <input [ngClass]="{'is-invalid':invalidField('motivo_consulta')}" type="text" formControlName="motivo_consulta" class="form-control" placeholder="Motivo de consulta" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+
+        <div class="mb-3">
+            <label>Estado</label>
+            <ng-select [readonly]="tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('estado')}" class="form-select form-select-lg"
+                [items]="opcionesEstados"
+                [multiple]="false"
+                [closeOnSelect]="true"
+                [searchable]="false"
+                bindLabel="estado"
+                placeholder="Seleccione"
+                formControlName="estado">
+            </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+
+        <div class="mb-3">
+            <label>Médico</label>
+            <ng-select [readonly]="tipoUsuario === 'medico'" [ngClass]="{'is-invalid':invalidField('medico')}" class="form-select form-select-lg"
+                [items]="medicos"
+                [multiple]="false"
+                [closeOnSelect]="true"
+                [searchable]="false"
+                bindLabel="nombres"
+                placeholder="Seleccione"
+                formControlName="medico">
+            </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+
+        <div class="mb-3">
+            <label>Paciente</label>
+            <ng-select [readonly]="tipoUsuario === 'medico' || tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('paciente')}" class="form-select form-select-lg"
+                [items]="pacientes"
+                [multiple]="false"
+                [closeOnSelect]="true"
+                [searchable]="false"
+                bindLabel="nombres"
+                placeholder="Seleccione"
+                formControlName="paciente">
+            </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+        <div class="mb-3">
+            <label>Especialidad</label>
+            <ng-select [ngClass]="{'is-invalid':invalidField('especialidad')}" class="form-select form-select-lg"
+                [items]="especialidades"
+                [multiple]="false"
+                [closeOnSelect]="true"
+                [searchable]="false"
+                bindLabel="nombre"
+                placeholder="Seleccione"
+                formControlName="especialidad">
+            </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+        <div class="mb-3">
+            <label>Examenes</label>
+            <ng-select [readonly]="tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('examenes')}" class="form-select form-select-lg"
+                [items]="opcionesExamenes"
+                [multiple]="true"
+                [closeOnSelect]="false"
+                [searchable]="false"
+                bindLabel="nombre"
+                placeholder="Seleccione"
+                formControlName="examenes">
+            </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+
+        <div class="mb-3">
+            <label>Recetas</label>
+            <ng-select [readonly]="tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('recetas')}" class="form-select form-select-lg"
+                [items]="opcionesRecetas"
+                [multiple]="true"
+                [closeOnSelect]="false"
+                [searchable]="false"
+                bindLabel="nombre"
+                placeholder="Seleccione"
+                formControlName="recetas">
+            </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+        
+    
+    
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">{{isEdit ? 'Editar cita médica': 'Crear cita médica'}}</button>
+        </div>
+    
+    </form>
+</div>
+

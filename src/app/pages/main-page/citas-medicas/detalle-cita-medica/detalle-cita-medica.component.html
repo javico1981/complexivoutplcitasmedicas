@@ -1,0 +1,64 @@
+<!-- Main content -->
+<section class="content">
+    <div class="contenedor-1 mb-3">
+        <div>
+            <strong>Fecha: </strong>{{citaMedica?.fecha}}
+        </div>
+        <div>
+            <strong>Horario: </strong>{{citaMedica?.horario}}
+        </div>
+        <div>
+            <strong>Paciente: </strong>{{citaMedica?.paciente?.nombres}}
+        </div>
+        <div>
+            <strong>Médico: </strong>{{citaMedica?.medico?.nombres}}
+        </div>
+        <div>
+            <strong>Estado: </strong>{{citaMedica?.estado}}
+        </div>
+        <div>
+            <strong>Especialidad: </strong>{{citaMedica?.especialidad?.nombre}}
+        </div>
+        
+    </div>
+
+    <div class="contenedor-2 mb-3">
+        <div>
+            <strong>Diagnostico: </strong>{{citaMedica?.diagnostico}}
+        </div>
+        <div>
+            <strong>Síntomas: </strong>{{citaMedica?.sintomas}}
+        </div>
+        <div>
+            <strong>Motivo de consulta: </strong>{{citaMedica?.motivo_consulta}}
+        </div>
+    </div>
+
+    <div class="contenedor-3">
+        <div class="mb-3">
+            <div>
+                <strong>Examenes:</strong>
+            </div>
+            <div class="mt-1">
+                <ng-container *ngFor="let examen of citaMedica?.examenes">
+                    <div>
+                        {{examen.nombre}}
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+       
+        <div>
+            <div>
+                <strong>Recetas:</strong>
+            </div>
+            <div class="mt-1">
+                <ng-container *ngFor="let receta of citaMedica?.recetas">
+                    <div>
+                        {{receta.nombre}}
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</section>

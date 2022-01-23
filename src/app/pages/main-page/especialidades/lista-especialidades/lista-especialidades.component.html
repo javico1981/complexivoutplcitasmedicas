@@ -1,1 +1,24 @@
-<p>lista-especialidades works!</p>
+<!-- Main content -->
+    <section class="content">
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Accción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let especialidad of Especialidades; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{especialidad.nombre}}</td>
+                    <td>{{especialidad.descripcion}}</td>
+                    <td>
+                        <span (click)="removeEspecialidad(especialidad)" class="btn btn-danger">Borrar</span> &nbsp;
+                        <span class="btn btn-primary" [routerLink]="['/especialidades/crear-especialidad/'+especialidad.uid]">Editar</span>
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+      </section>
