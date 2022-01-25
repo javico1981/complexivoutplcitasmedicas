@@ -52,7 +52,7 @@
     
         
         <div class="mb-3">
-            <label>edad</label>
+            <label>Edad</label>
             <input  [ngClass]="{'is-invalid':invalidField('edad')}" type="number" formControlName="edad" class="form-control" placeholder="Edad" [readonly]="true">
             <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
         </div>
@@ -74,7 +74,7 @@
                 [closeOnSelect]="false"
                 [searchable]="false"
                 bindLabel="nombre"
-                placeholder="Selecciones"
+                placeholder="Seleccione"
                 formControlName="especialidades">
             </ng-select>
             <div class="invalid-feedback">Por favor llene este campo correctamente.</div>

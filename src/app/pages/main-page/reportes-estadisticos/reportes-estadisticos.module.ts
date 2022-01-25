@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ReportesEstadisticosComponent } from './reportes-estadisticos.component';
 import { ReportesEstadisticosRoutingModule } from './reportes-estadisticos-routing.module';
 
@@ -8,7 +8,8 @@ import { ReportesEstadisticosRoutingModule } from './reportes-estadisticos-routi
   declarations: [ReportesEstadisticosComponent],
   imports: [
     CommonModule,
-    ReportesEstadisticosRoutingModule
+    ReportesEstadisticosRoutingModule,
+    NgSelectModule
   ]
 })
 export class ReportesEstadisticosModule { }

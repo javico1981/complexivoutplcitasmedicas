@@ -100,7 +100,7 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as {}
         }
       })
-    })
+    });
 
     this.citasMedicasService.getMedicosList().pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
       this.medicos = res.map( (e: any) => {
@@ -118,7 +118,7 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as {}
         }
       })
-    })
+    });
 
     this.citasMedicasService.getRecetasList().pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
       this.opcionesRecetas = res.map( (e: any) => {
@@ -127,7 +127,7 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as {}
         }
       })
-    })
+    });
 
 
     if(this.isEdit) {
