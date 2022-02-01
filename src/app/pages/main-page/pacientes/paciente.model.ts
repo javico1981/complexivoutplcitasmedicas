@@ -1,4 +1,4 @@
-
+//Clase pacientes que sirve de modelo para crear objetos de clase paciente
 export interface Paciente {
 	id: string;
 	cedula: string;

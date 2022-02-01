@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
-
+  //Arreglos para mostrar los botones de acuerdo al rol en sidebar
   user: any;
   listaBotonesVista: any[] = [];
   listaBotonesAdmin = [
@@ -29,11 +29,6 @@ export class SideBarComponent implements OnInit {
       title: 'Medicos'
     },
     {
-      link: '/especialidades/lista-especialidades',
-      icon: 'fa-first-aid',
-      title: 'Especialidades'
-    },
-    {
       link: '/usuarios/lista-usuarios',
       icon: 'fa-users',
       title: 'Usuarios'
@@ -42,6 +37,21 @@ export class SideBarComponent implements OnInit {
       link: '/reportes-estadisticos',
       icon: 'fa-poll',
       title: 'Reportes Estadisticos'
+    },
+    {
+      link: '/especialidades/lista-especialidades',
+      icon: 'fa-first-aid',
+      title: 'Especialidades'
+    },
+    {
+      link: '/examenes/lista-examenes',
+      icon: 'fa-microscope',
+      title: 'Examenes'
+    },
+    {
+      link: '/medicamentos/lista-medicamentos',
+      icon: 'fa-pills',
+      title: 'Medicamentos'
     }
   ]
 
@@ -88,7 +98,7 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.loginService.getDataUserLogged();
-
+    //Select case para determinar la lista de botones
     switch (this.user.rolId) {
       case environment.roles.administrador.id:
         this.listaBotonesVista = this.listaBotonesAdmin;

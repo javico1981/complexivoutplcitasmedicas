@@ -6,7 +6,7 @@ import { UsuariosComponent } from './usuarios.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 
-
+//Rutas del Componente Usuarios
 const routes: Routes = [
     { path: '', component: UsuariosComponent,
     children:[

@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
+//funciones para manipular la coleccion especialidades
 export class EspecialidadesService {
 
   constructor(private angularFirestore: AngularFirestore, private afAuth: AngularFireAuth ) { }
@@ -17,13 +18,13 @@ export class EspecialidadesService {
     .doc(id)
     .valueChanges()
   }
-
+  //lista especialidades
   getEspecialidadesList() {
     return this.angularFirestore
     .collection('especialidades')
     .snapshotChanges()
   }
-
+  //Crear especialidad
   createEspecialidad(especialidad: Especialidad) {
     return new Promise<any>((resolve, reject) => {
       this.angularFirestore

@@ -12,10 +12,13 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './detalle-cita-medica.component.html',
   styleUrls: ['./detalle-cita-medica.component.css']
 })
+//FUNCIONES PARA DETALLAR CITAS MEDICAS
 export class DetalleCitaMedicaComponent implements OnInit, OnDestroy {
 
   citaMedicaId: string = '';
-  citaMedica: CitaMedica | undefined;
+  citaMedica: any;
+  userData: any;
+  today = new Date();
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -32,10 +35,16 @@ export class DetalleCitaMedicaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.userData = this.citasMedicasService.getUserData();
+
     this.citasMedicasService.getCitaMedicaDoc(this.citaMedicaId).pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
       this.citaMedica = res;
     })
 
+  }
+
+  imprimirReceta(): void {
+    window.print();
   }
 
   ngOnDestroy(): void {

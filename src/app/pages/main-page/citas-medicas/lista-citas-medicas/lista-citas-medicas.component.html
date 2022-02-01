@@ -1,3 +1,4 @@
+<!-- TABLA PARA LISTAR CITAS MEDICAS -->
 <!-- Main content -->
     <section class="content">
           <table class="table">
@@ -9,7 +10,8 @@
                     <th scope="col">Médico</th>
                     <th scope="col">Paciente</th>
                     <th scope="col">Especialidad</th>
-                    <th scope="col">Accción</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +22,7 @@
                     <td>{{citaMedica.medico.nombres}}</td>
                     <td>{{citaMedica.paciente.nombres}}</td>
                     <td>{{citaMedica.especialidad.nombre}}</td>
+                    <td>{{citaMedica.estado}}</td>
                     <td>
                         <span *ngIf="tipoUsuario === 'empleado'" (click)="removeCitaMedica(citaMedica)" class="btn btn-danger">Borrar</span> &nbsp;
                         <span *ngIf="tipoUsuario !== 'paciente'" class="btn btn-primary" [routerLink]="['/citas-medicas/crear-cita-medica/'+citaMedica.id]">Editar</span> &nbsp;

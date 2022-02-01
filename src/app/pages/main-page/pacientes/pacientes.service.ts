@@ -6,6 +6,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
+
+//Funciones a utilizar en el componente Pacientes Listar, crear, traer info de db, etc
 export class PacientesService {
 
   constructor(private angularFirestore: AngularFirestore, private afAuth: AngularFireAuth ) { }

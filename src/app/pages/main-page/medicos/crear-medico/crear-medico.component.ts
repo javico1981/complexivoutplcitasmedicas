@@ -32,7 +32,7 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private medicosService: MedicosService, private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute) {
-
+      //Inicializamos el formulario
       this.medicoForm=this.formBuilder.group({
           cedula: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
           apellidos: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -59,7 +59,7 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
       moment.locale(this.locale);
 
   }
-
+  //Funciones ya con datos declaradas en el servicio de medicos para realizar la creacion de medicos
   ngOnInit(): void {
 
     this.medicosService.getEspecialidadesList().pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
@@ -118,7 +118,7 @@ export class CrearMedicoComponent implements OnInit, OnDestroy {
     this.medicoForm.get('edad')?.updateValueAndValidity();
   
   }
-
+  
   dateToAge(fechaNacimiento: Date): number {
     return moment().diff(moment(fechaNacimiento, 'YYYY-MM-DD'), 'years');
   }

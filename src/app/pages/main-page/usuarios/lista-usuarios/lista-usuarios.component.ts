@@ -19,6 +19,7 @@ export class ListaUsuariosComponent implements OnInit, OnDestroy {
 
   constructor(public usuariosService: UsuariosService) { }
 
+  //LLenamos el arreglo usuario con la informacion de la coleccion usuarios de la base de datos y utilizamos funciones declaradas en el servicio usuarios
   ngOnInit(): void {
     this.usuariosService.getUsuarioList().pipe(takeUntil(this._unsubscribeAll)).subscribe(res => {
       this.Usuarios = res.map( (e: any) => {

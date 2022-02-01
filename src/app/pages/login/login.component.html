@@ -15,7 +15,7 @@
 	      	(ngSubmit)="login()"
 
 	      >
-
+			<!-- Vista del Login -->
 	        <div class="input-group mb-3">
 	          
 	          <input type="email" 
@@ -48,7 +48,7 @@
 	          <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
 	        </div>
 
-			
+			<!-- Vista selección de usuario -->
 			<div class="mb-3">
 				<label>Tipo de usuario</label>
 				<select [ngClass]="{'is-invalid':invalidField('tipoUsuario')}" class="form-control form-select form-select-lg" formControlName="tipoUsuario" required>

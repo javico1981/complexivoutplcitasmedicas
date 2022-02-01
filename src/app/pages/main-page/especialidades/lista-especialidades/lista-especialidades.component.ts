@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './lista-especialidades.component.html',
   styleUrls: ['./lista-especialidades.component.css']
 })
+//funciones para listar la coleccion especialidad
 export class ListaEspecialidadesComponent implements OnInit, OnDestroy {
 
   Especialidades: Especialidad[]=[];
@@ -17,6 +18,7 @@ export class ListaEspecialidadesComponent implements OnInit, OnDestroy {
   constructor(public especialidadesService:EspecialidadesService) { }
 
   ngOnInit(): void {
+    //extrae los datos de la coleccion especialidad
     this.especialidadesService.getEspecialidadesList().pipe(takeUntil(this._unsubscribeAll)).subscribe(res => {
       this.Especialidades = res.map( e => {
         return {

@@ -15,7 +15,7 @@ export class ListaMedicosComponent implements OnInit, OnDestroy {
   Medicos: Medico[]=[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   constructor(public medicosService:MedicosService) { }
-
+//LLenamos el arreglo usuario con la informacion de la coleccion medicos de la base de datos y utilizamos funciones declaradas en el servicio medicos
   ngOnInit(): void {
     this.medicosService.getMedicoList().pipe(takeUntil(this._unsubscribeAll)).subscribe(res => {
       this.Medicos = res.map( e => {

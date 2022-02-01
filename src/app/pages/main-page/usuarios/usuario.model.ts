@@ -1,4 +1,4 @@
-
+//Las clases utilizados para crear los objetos correspondientes a la tabla de base de datos
 export interface Usuario {
 	id: string;
 	cedula: string;

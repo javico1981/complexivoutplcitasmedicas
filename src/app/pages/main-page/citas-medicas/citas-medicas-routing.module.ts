@@ -7,7 +7,7 @@ import { ListaCitasMedicasComponent } from './lista-citas-medicas/lista-citas-me
 import { CrearCitaMedicaComponent } from './crear-cita-medica/crear-cita-medica.component';
 import { DetalleCitaMedicaComponent } from './detalle-cita-medica/detalle-cita-medica.component';
 
-
+//RUTAS DEL COMPONENTE CITAS MEDICAS
 const routes: Routes = [
   { 
     path: '', component: CitasMedicasComponent,

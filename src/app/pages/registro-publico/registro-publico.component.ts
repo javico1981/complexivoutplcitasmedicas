@@ -34,6 +34,7 @@ export class RegistroPublicoComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private router: Router) {
 
+    //Constructor del formulario de resgistro publico
     this.registroForm = this.form.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -57,6 +58,7 @@ export class RegistroPublicoComponent implements OnInit, OnDestroy {
     
   }
 
+  //Funcion para registrar pacientes
   registroPaciente(){
 
    
@@ -109,13 +111,14 @@ export class RegistroPublicoComponent implements OnInit, OnDestroy {
     })
   }
     
-
+  //Controlamos el click del formulario
   invalidField(field:string){
       
     return functions.invalidField(field, this.registroForm, this.formSubmitted);
       
   }
 
+  //Controlamos la edad que no sea mayor a la actual
   changeInputDate(event: any) {
 
     if (this.registroForm.get('fecha_nacimiento')?.value == "") {
@@ -127,6 +130,7 @@ export class RegistroPublicoComponent implements OnInit, OnDestroy {
   
   }
 
+  //Funcion para calcular la edad
   dateToAge(fechaNacimiento: Date): number {
     return moment().diff(moment(fechaNacimiento, 'YYYY-MM-DD'), 'years');
   }

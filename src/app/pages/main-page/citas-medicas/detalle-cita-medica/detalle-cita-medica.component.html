@@ -1,24 +1,24 @@
+<!-- VISTA DETALLE DE CITAS MEDICAS -->
 <!-- Main content -->
-<section class="content">
+<section class="content-1 hideOnPrint">
     <div class="contenedor-1 mb-3">
-        <div>
-            <strong>Fecha: </strong>{{citaMedica?.fecha}}
+        <div class="mr-3">
+            <div>
+                <strong>Fecha cita: </strong>{{citaMedica?.fecha}}
+            </div>
+            <div>
+                <strong>Horario cita: </strong>{{citaMedica?.horario}}
+            </div>
         </div>
         <div>
-            <strong>Horario: </strong>{{citaMedica?.horario}}
+            <div>
+                <strong>Estado: </strong>{{citaMedica?.estado}}
+            </div>
+            <div>
+                <strong>Especialidad: </strong>{{citaMedica?.especialidad?.nombre}}
+            </div>
         </div>
-        <div>
-            <strong>Paciente: </strong>{{citaMedica?.paciente?.nombres}}
-        </div>
-        <div>
-            <strong>Médico: </strong>{{citaMedica?.medico?.nombres}}
-        </div>
-        <div>
-            <strong>Estado: </strong>{{citaMedica?.estado}}
-        </div>
-        <div>
-            <strong>Especialidad: </strong>{{citaMedica?.especialidad?.nombre}}
-        </div>
+        
         
     </div>
 
@@ -47,18 +47,93 @@
                 </ng-container>
             </div>
         </div>
-       
-        <div>
-            <div>
-                <strong>Recetas:</strong>
+    </div>
+</section>
+<section class="content-2">
+    <div class="receta-contenedor">
+        <div *ngIf="citaMedica?.estado === 'completada'" class="mb-3 hideOnPrint">
+            <button   class="btn btn-danger" (click)="imprimirReceta()">Imprimir receta</button>
+        </div>
+        <div class="receta-header">
+            <img class="receta-logo-hospital" src="assets/img/hbc.png">
+            <div class="receta-nombre-hospital">
+                <b>Hospital EL ORO</b>
+            </div>
+        </div>
+        <div class="receta-info-usuarios">
+
+            <div class="receta-info-medico">
+                <div class="label-container">
+                    Médico
+                </div>
+                <div class="item-info">
+                    {{citaMedica?.medico?.nombres}} {{citaMedica?.medico?.apellidos}}
+                </div>
+                <div class="item-info">
+                    Especialidad: {{citaMedica?.medico?.especialidades[0]?.nombre}}
+                </div>
+                <div class="item-info">
+                    Telefono: {{citaMedica?.medico?.telefono}}
+                </div>
+            </div>
+            <div class="receta-info-paciente">
+                <div class="label-container">
+                    Paciente
+                </div>
+                <div class="item-info">
+                    {{citaMedica?.paciente?.nombres}} {{citaMedica?.paciente?.apellidos}}
+                </div>
+                <div class="item-info">
+                    Edad: {{citaMedica?.paciente?.edad}}
+                </div>
+                <div class="item-info">
+                    Sexo: {{citaMedica?.paciente?.genero}}
+                </div>
+                <div class="item-info">
+                    Fecha cita: {{citaMedica?.fecha}} {{citaMedica?.horario}}
+                </div>
+            </div>
+
+        </div>
+        
+
+        <div class="receta-info">
+           
+            <div class="label-container">
+                Medicamentos:
             </div>
             <div class="mt-1">
-                <ng-container *ngFor="let receta of citaMedica?.recetas">
+                <ng-container *ngFor="let medicamento of citaMedica?.medicamentos">
                     <div>
-                        {{receta.nombre}}
+                        {{medicamento.nombre}}
                     </div>
                 </ng-container>
             </div>
         </div>
+
+        <div class="receta-info">
+            <div class="label-container">
+                Receta:
+            </div>
+            <div class="item-info">
+                {{citaMedica?.receta}}
+            </div>
+        </div>
+
+        <div class="footer-receta">
+
+            <div class="footer-info-impresor">
+                <div>
+                    Generado por: {{userData?.nombres}} {{userData?.apellidos}}
+                </div>
+                <div>
+                    Fecha generación: {{today | date:'yyyy-MM-dd'}}
+                </div>
+            </div>
+            <div class="footer-info-hospital">
+                <b>Hospital EL ORO</b>
+            </div>
+        </div>
     </div>
+
 </section>

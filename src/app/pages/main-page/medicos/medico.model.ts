@@ -1,5 +1,5 @@
 import { Especialidad } from 'src/app/pages/main-page/especialidades/especialidad.model';
-
+//Clase medico que permite la creacion de objetos de tipo medico.
 
 export interface Medico {
 	id: string;

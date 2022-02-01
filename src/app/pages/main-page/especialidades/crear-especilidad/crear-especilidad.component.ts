@@ -30,11 +30,11 @@ export class CrearEspecilidadComponent implements OnInit, OnDestroy {
   formSubmitted = false;
   errorForm = "";
   
-
+  
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private especialidadesService: EspecialidadesService, private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute) {
-
+      //inicializacion de formulario especialidades
       this.especialidadForm=this.formBuilder.group({
           id: ["", [Validators.required]],
           nombre: ["", [Validators.required]],
@@ -53,7 +53,7 @@ export class CrearEspecilidadComponent implements OnInit, OnDestroy {
       
 
   }
-
+  //funciones de control para la creacion de especialidades declaradas en el servicio especialidades
   ngOnInit(): void {
 
     if(this.isEdit) {

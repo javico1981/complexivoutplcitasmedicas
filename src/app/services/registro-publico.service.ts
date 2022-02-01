@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Paciente } from '../pages/main-page/pacientes/paciente.model';
 
-
+//Metodos para utilizados en el registro público
 
 @Injectable({
   providedIn: 'root'

@@ -8,12 +8,12 @@ import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 import { Especialidad } from '../../especialidades/especialidad.model';
 import { Examen } from '../cita-medica.model';
-import { Receta } from '../cita-medica.model';
+import { Medicamento } from '../cita-medica.model';
 import { Medico } from '../../medicos/medico.model';
 import { Paciente } from '../../pacientes/paciente.model';
 import { environment } from 'src/environments/environment';
 
-export const estados = ['creada', 'cancelada', ' completada']
+export const estados = ['creada', 'cancelada', 'completada']
 
 @Component({
   selector: 'app-crear-cita-medica',
@@ -27,7 +27,7 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
   userData: any;
 
   opcionesExamenes: Examen[] = [];
-  opcionesRecetas: Receta[] = [];
+  opcionesMedicamentos: Medicamento[] = [];
   medicos: Medico[] = [];
   especialidades: Especialidad[] = [];
   pacientes: Paciente[] =[]
@@ -53,7 +53,7 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
       }else {
         this.tipoUsuario = 'empleado';
       }
-
+      //INCIALIZACION DE FORMULARIO CITAS MEDICAS
       this.citaMedicaForm=this.formBuilder.group({
 
           fecha: [null, [Validators.required]],
@@ -68,7 +68,8 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
           pacienteUID: [null],
           especialidad: [null, [Validators.required]],
           examenes: [[]],
-          recetas: [[]],
+          medicamentos: [[]],
+          receta: ["", [Validators.minLength(3), Validators.maxLength(300)]],
       });
 
       route.paramMap.pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
@@ -81,7 +82,7 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
       moment.locale(this.locale);
 
   }
-
+  //fUNCIONES PARA CREACION Y CONTROL DE CITAS MEDICAS
   ngOnInit(): void {
 
     this.citasMedicasService.getEspecialidadesList().pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
@@ -120,8 +121,8 @@ export class CrearCitaMedicaComponent implements OnInit, OnDestroy {
       })
     });
 
-    this.citasMedicasService.getRecetasList().pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
-      this.opcionesRecetas = res.map( (e: any) => {
+    this.citasMedicasService.getMedicamentosList().pipe(takeUntil(this._unsubscribeAll)).subscribe((res: any) => {
+      this.opcionesMedicamentos = res.map( (e: any) => {
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as {}

@@ -17,7 +17,7 @@ export class EspecialidadesComponent implements OnInit, OnDestroy {
   
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-
+  //controla las listas que se presentaran en el componente
   constructor(private route: Router) {
 
     this.route.events.pipe(filter(event => event instanceof NavigationEnd), takeUntil(this._unsubscribeAll)).subscribe((res: any) => {

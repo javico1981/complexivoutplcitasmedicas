@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
+//Se implementa funciones que se utilizaron para trabajar con la coleccion medicos de la base de datos
 export class MedicosService {
 
   constructor(private angularFirestore: AngularFirestore, private afAuth: AngularFireAuth ) { }

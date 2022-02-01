@@ -2,7 +2,7 @@ import { Especialidad } from 'src/app/pages/main-page/especialidades/especialida
 import { Medico } from '../medicos/medico.model';
 import { Paciente } from '../pacientes/paciente.model';
 
-
+// clases creadas que permiten la creacion de objetos de tipo cita medica, examenx y medicamentos
 export interface CitaMedica {
 	id: string;	
 	fecha: Date;
@@ -17,7 +17,8 @@ export interface CitaMedica {
 	pacienteUID: string;
 	especialidad: Especialidad;
 	examenes: Examen[];
-	recetas: Receta[];
+	medicamentos: Medicamento[];
+	receta: string;
 
 }
 
@@ -27,7 +28,7 @@ export interface Examen {
 	descripcion: string;
 }
 
-export interface Receta {
+export interface Medicamento {
 	id: string;
 	nombre: string;
 	descripcion: string;

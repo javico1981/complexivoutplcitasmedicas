@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Paciente } from '../pacientes/paciente.model';
 import { LoginService } from 'src/app/services/login.service';
 
-
+//Funciones a ser utilizados en el componente de reportes estadisticos
 @Injectable({
   providedIn: 'root'
 })

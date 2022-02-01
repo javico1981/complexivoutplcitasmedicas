@@ -2,6 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+//Usamos este archivo para declarar variables e información que no va a cambiar durante la ejecución del programa
+//Realizamos también la conexion con firebase
 export const environment = {
   production: false,
   urlFirebase: 'https://hospitaldb-b1c76-default-rtdb.firebaseio.com/',

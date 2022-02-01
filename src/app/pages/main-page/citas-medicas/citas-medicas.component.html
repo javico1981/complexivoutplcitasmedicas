@@ -1,3 +1,4 @@
+<!-- componente principal citas medicas -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -5,9 +6,14 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>Citas médicas</h1>
-          <button *ngIf="isList && !isMedico" class="btn btn-primary" [routerLink]="['/citas-medicas/crear-cita-medica']">Crear cita médica</button>
-          <button *ngIf="isCreate || isDetail" class="btn btn-primary" [routerLink]="['/citas-medicas/lista-citas-medicas']">Lista citas médicas</button>
+          
+            <button *ngIf="isList && !isMedico" class="btn btn-primary" [routerLink]="['/citas-medicas/crear-cita-medica']">Crear cita médica</button>
+            <button *ngIf="isCreate || isDetail" class="btn btn-primary" [routerLink]="['/citas-medicas/lista-citas-medicas']">Lista citas médicas</button>
+
+          
         </div>
+         
+       
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a [routerLink]="['/']">Inicio</a></li>
@@ -17,7 +23,7 @@
       </div>
     </div><!-- /.container-fluid -->
   </section>
-
+  <!-- ETIQUE QUE PERMITE LAS RUTAS CONTEDIDO DINAMICO -->
   <router-outlet></router-outlet>
   <!-- /.content -->
 </div>

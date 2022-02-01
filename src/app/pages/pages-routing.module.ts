@@ -43,6 +43,14 @@ const routes: Routes = [
           canActivate: [ RolGuard ],
           data: { usersEnabled: [environment.roles.administrador.id] }
         },
+        { path: 'examenes', loadChildren: () => import('./main-page/examenes/examenes.module').then(m=>m.ExamenesModule),
+          canActivate: [ RolGuard ],
+          data: { usersEnabled: [environment.roles.administrador.id] }
+        },
+        { path: 'medicamentos', loadChildren: () => import('./main-page/medicamentos/medicamentos.module').then(m=>m.MedicamentosModule),
+          canActivate: [ RolGuard ],
+          data: { usersEnabled: [environment.roles.administrador.id] }
+        },
         { 
           path: 'citas-medicas', loadChildren: () => import('./main-page/citas-medicas/citas-medicas.module').then(m=>m.CitasMedicasModule)
         },

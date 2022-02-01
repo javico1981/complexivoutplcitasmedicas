@@ -6,7 +6,7 @@ import { PacientesComponent } from './pacientes.component';
 import { ListaPacientesComponent } from './lista-pacientes/lista-pacientes.component';
 import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
 
-
+//rutas del componente pacientes
 const routes: Routes = [
     { path: '', component: PacientesComponent,
     children:[

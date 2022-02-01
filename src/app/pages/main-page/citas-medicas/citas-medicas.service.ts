@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/login.service';
 @Injectable({
   providedIn: 'root'
 })
+//Funciones utilizadas para la gestion de la coleccion citas medicas
 export class CitasMedicasService {
 
   constructor(private angularFirestore: AngularFirestore, private loginService: LoginService ) { }
@@ -36,9 +37,9 @@ export class CitasMedicasService {
     .snapshotChanges()
   }
 
-  getRecetasList() {
+  getMedicamentosList() {
     return this.angularFirestore
-    .collection('recetas')
+    .collection('medicamentos')
     .snapshotChanges()
   }
 

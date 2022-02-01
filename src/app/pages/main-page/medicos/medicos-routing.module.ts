@@ -7,7 +7,7 @@ import { ListaMedicosComponent } from './lista-medicos/lista-medicos.component';
 import { CrearMedicoComponent } from './crear-medico/crear-medico.component';
 
 
-
+//Rutas del componente medicos
 
 const routes: Routes = [
     { path: '', component: MedicosComponent, 

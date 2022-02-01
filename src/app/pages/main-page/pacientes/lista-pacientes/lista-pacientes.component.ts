@@ -16,7 +16,7 @@ export class ListaPacientesComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(public pacientesService: PacientesService) { }
-
+  //LLenamos el arreglo usuario con la informacion de la coleccion usuarios de la base de datos y utilizamos funciones declaradas en el servicio pacientes
   ngOnInit(): void {
     this.pacientesService.getPacienteList().pipe(takeUntil(this._unsubscribeAll)).subscribe(res => {
       this.Pacientes = res.map( e => {
@@ -27,7 +27,7 @@ export class ListaPacientesComponent implements OnInit, OnDestroy {
       })
     })
   }
-
+  //removemos paciente
   removePaciente(paciente: Paciente){
     if(confirm("Are you sure to delete " + paciente.nombres)){
       this.pacientesService.deletePaciente(paciente);

@@ -1,0 +1,24 @@
+<!-- Contenido principal componente examenes -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Examenes</h1>
+            <button *ngIf="isList" class="btn btn-primary" [routerLink]="['/examenes/crear-examen']">Crear Examen</button>
+            <button *ngIf="isCreate" class="btn btn-primary" [routerLink]="['/examenes/lista-examenes']">Lista Examenes</button>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a [routerLink]="['/']">Inicio</a></li>
+              <li class="breadcrumb-item active">Examenes</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- etiqueta de control de rutas en pantalla principal -->
+    <router-outlet></router-outlet>
+    <!-- /.content -->
+  </div>

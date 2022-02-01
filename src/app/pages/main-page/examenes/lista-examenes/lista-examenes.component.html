@@ -1,0 +1,25 @@
+<!-- Tabla para listar examenes -->
+<!-- Main content -->
+    <section class="content">
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let examen of Examenes; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{examen.nombre}}</td>
+                    <td>{{examen.descripcion}}</td>
+                    <td>
+                        <span (click)="removeExamen(examen)" class="btn btn-danger">Borrar</span> &nbsp;
+                        <span class="btn btn-primary" [routerLink]="['/examenes/crear-examen/'+examen.uid]">Editar</span>
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+      </section>

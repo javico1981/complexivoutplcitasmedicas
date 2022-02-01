@@ -31,7 +31,8 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
   rolesIdLista: any[] = [];
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+  
+  //Se inicializa el formulario
   constructor(private usuariosService: UsuariosService, private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute) {
 
       this.usuarioForm=this.formBuilder.group({
@@ -59,7 +60,7 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
       moment.locale(this.locale);
 
   }
-
+  //Asignacion de roles a los usuarios creados
   ngOnInit(): void {
 
    

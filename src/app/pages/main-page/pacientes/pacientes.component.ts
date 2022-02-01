@@ -15,6 +15,7 @@ export class PacientesComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
+ //Se realiza el control para presentar las listas en el componente
   constructor(private route: Router) {
 
     this.route.events.pipe(filter(event => event instanceof NavigationEnd), takeUntil(this._unsubscribeAll)).subscribe((res: any) => {

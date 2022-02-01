@@ -1,4 +1,4 @@
-
+<!-- VISTA FORMULARIO DE CITAS MEDICAS -->
 <div class="container-fluid col-6">
     <form [formGroup]="citaMedicaForm" (ngSubmit)="ngSubmit()" novalidate>
 
@@ -108,16 +108,23 @@
 
 
         <div class="mb-3">
-            <label>Recetas</label>
-            <ng-select [readonly]="tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('recetas')}" class="form-select form-select-lg"
-                [items]="opcionesRecetas"
+            <label>Medicamentos</label>
+            <ng-select [readonly]="tipoUsuario === 'paciente'" [ngClass]="{'is-invalid':invalidField('medicamentos')}" class="form-select form-select-lg"
+                [items]="opcionesMedicamentos"
                 [multiple]="true"
                 [closeOnSelect]="false"
                 [searchable]="false"
                 bindLabel="nombre"
                 placeholder="Seleccione"
-                formControlName="recetas">
+                formControlName="medicamentos">
             </ng-select>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+
+        <div class="mb-3">
+            <label>Receta</label>
+            <textarea [readonly]="tipoUsuario === 'paciente'" rows="4" [ngClass]="{'is-invalid':invalidField('receta')}" formControlName="receta" class="form-control" placeholder="Receta">
+            </textarea>
             <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
         </div>
         

@@ -29,7 +29,7 @@ export class CrearPacienteComponent implements OnInit, OnDestroy {
 
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+  //Se inicializa el formulario y se utiliza funciones declaradas en el servicio para la creacion de pacientes
   constructor(private pacientesService: PacientesService, private formBuilder: FormBuilder, private router: Router, route: ActivatedRoute) {
 
       this.pacienteForm=this.formBuilder.group({
@@ -107,12 +107,12 @@ export class CrearPacienteComponent implements OnInit, OnDestroy {
     this.pacienteForm.get('edad')?.updateValueAndValidity();
   
   }
-
+  //Calculo de la edad
   dateToAge(fechaNacimiento: Date): number {
     return moment().diff(moment(fechaNacimiento, 'YYYY-MM-DD'), 'years');
   }
 
-
+  //control de boton del formulario
   invalidField(field:string){
        
     return functions.invalidField(field, this.pacienteForm, this.formSubmitted);

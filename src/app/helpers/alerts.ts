@@ -1,3 +1,4 @@
+//Funciones de alerta del sweetalert
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 
  export class alerts{

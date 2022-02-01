@@ -1,0 +1,30 @@
+<!-- Vista formulario para crear examenes -->
+<div class="container-fluid col-6">
+    <form [formGroup]="examenForm" (ngSubmit)="ngSubmit()" novalidate>
+
+          
+        <div class="mb-3">
+            <label>Id</label>
+            <input [ngClass]="{'is-invalid':invalidField('id')}" type="text" formControlName="id" class="form-control" placeholder="Id" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Nombre</label>
+            <input [ngClass]="{'is-invalid':invalidField('nombre')}" type="text" formControlName="nombre" class="form-control" placeholder="nombre" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+        <div class="mb-3">
+            <label>Descripción</label>
+            <input [ngClass]="{'is-invalid':invalidField('descripcion')}" type="text" formControlName="descripcion" class="form-control" placeholder="descripcion" required>
+            <div class="invalid-feedback">Por favor llene este campo correctamente.</div>
+        </div>
+    
+           
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">{{isEdit ? 'Editar Examen': 'Crear Examen'}}</button>
+        </div>
+    
+    </form>
+</div>

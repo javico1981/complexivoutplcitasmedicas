@@ -30,7 +30,8 @@ export class ReportesEstadisticosComponent implements OnInit, OnDestroy {
   
   constructor(private reportesEstadisticosService: ReportesEstadisticosService, private router: Router, private route: ActivatedRoute){
       
-     
+  //Se utiliza las funciones declaradas en el servicio de reportes estadisticos para obtener la informacion de la base de datos
+  //para luego enlazar con la vista y presentar al usuario   
 
   }
 

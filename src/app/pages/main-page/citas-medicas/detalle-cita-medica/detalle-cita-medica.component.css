@@ -1,19 +1,103 @@
 
-.content {
-    padding: 30px;
+@media print {
+    .hideOnPrint {
+        display: none !important;
+    }
+}
+
+.content-1 {
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+}
+
+.content-2 {
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
 }
 
 .contenedor-1 {
     display: flex;
-    justify-content: space-between;
-    float: right;
-    width: 100%;
+    align-items: center;
+    justify-content: left;
+    width: 1000%;
 }
 
 .contenedor-2 {
     width: 100%;
 }
 
-.contenedor-1 {
-    width: 100%;
+
+.receta-contenedor {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.receta-header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.receta-logo-hospital {
+    width: 200px;
+}
+
+.receta-nombre-hospital {
+    margin-left: 10px;
+    font-size: 35px;
+    color:rgb(3, 3, 80)
+}
+
+.receta-info-usuarios {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.receta-info-medico {
+    width: 50%;
+    padding: 5px;
+}
+
+.receta-info-paciente{
+    width: 50%;
+    padding: 5px;
+}
+.receta-info {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.label-container {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.item-info {
+    padding: 3px;
+}
+
+.footer-receta {
+    padding: 10px;
+    text-align: center;
+}
+
+.footer-info-impresor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-info-hospital {
+    text-align: center;
+    margin-top: 5px;
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-top-color: blue;
 }

@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './lista-citas-medicas.component.html',
   styleUrls: ['./lista-citas-medicas.component.css']
 })
+//funciones para listar la coleccion CITAS MEDICAS
 export class ListaCitasMedicasComponent implements OnInit, OnDestroy {
 
   tipoUsuario = '';

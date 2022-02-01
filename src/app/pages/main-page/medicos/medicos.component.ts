@@ -10,6 +10,7 @@ import { filter, takeUntil } from 'rxjs/operators';
   templateUrl: './medicos.component.html',
   styleUrls: ['./medicos.component.css']
 })
+//Se realiza el control para presentar las listas en el componente
 export class MedicosComponent implements OnInit, OnDestroy {
 
   isList = true;

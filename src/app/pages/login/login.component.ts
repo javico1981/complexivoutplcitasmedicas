@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
   }
-
+  //Se realiza con el control del tipo de usuario que esta accesando
   login(){
     this.formSubmitted = true;
     

@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 
+//Definimos metodos utlizados para realizar la conexion con la base de datos
 
 @Injectable({
   providedIn: 'root'

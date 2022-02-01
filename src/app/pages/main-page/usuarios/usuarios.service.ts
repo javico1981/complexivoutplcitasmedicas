@@ -6,6 +6,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
+
+//Funciones a utilizar en el componente usuarios
 export class UsuariosService {
 
   constructor(private angularFirestore: AngularFirestore, private afAuth: AngularFireAuth ) { }
