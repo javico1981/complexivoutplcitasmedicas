@@ -11,7 +11,7 @@ https://github.com/javico1981/complexivoutplcitasmedicas.git
     git clone https://github.com/javico1981/complexivoutplcitasmedicas.git
 
 4.- Instalar las dependencias
-    Ubicarse en el directorio donde fue clonada la aplicación abrir la terminar y ejecutar el sigueinte comando: npm install
+    Ubicarse en el directorio donde fue clonada la aplicación abrir la terminar y ejecutar el siguiente comando: npm install
     
 5.- Ingresar con credenciales de administrador:
     usuario: admin@admin.com
